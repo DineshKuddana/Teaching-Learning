@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    height: inherit;
+}
+
+.courses-container {
+    width: 100%; 
+    padding: 40px 0; 
+    background-color: #fff; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.courses-layout {
+    display: flex; 
+   
+}
+
+.course-list {
+    flex: 1;
+   
+}
+
+.course-details {
+    margin: 20px 20px;
+    flex: 3; 
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #555;
+}
+
+.course-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.course-list-item {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+    list-style-type: none;
+}
+
+.course-list-item:hover,
+.course-list-item.active {
+    background-color: #eee;
+}
+
+/* Styles for the tabs */
+.tabs {
+    display: flex;
+    margin-top: 20px;
+}
+
+.tab {
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.tab:hover,
+.tab.active {
+    background-color: #ddd;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+
+.videos{
+    height: 200px;
+}
+
+.def{
+    height: 300px;
+}
+
+.course-image{
+    margin: 20px 0;
+}
+
+
+.head{
+    margin: 25px 0;
+    font-size: 34px;
+    color: rgba(27, 4, 199, 0.852);
+    font-weight: 600;
+}
+
+
+.video-section {
+    margin-top: 20px;
+}
+
+.video-section h3 {
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .courses-layout {
+        flex-direction: column; /* Stack vertically on small screens */
+    }
+
+    .course-list {
+        margin-right: 0; 
+    }
+}
+
+
+
+.syllabus-list {
+    list-style-type: none; 
+    padding-left: 20px;
+    margin-top: 10px; 
+  }
+  
+  .syllabus-list li {
+    margin-bottom: 5px;
+  }
+  

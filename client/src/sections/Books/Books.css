@@ -1,0 +1,211 @@
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #f4f4f4;
+}
+
+/* Main Content */
+main {
+  max-width: 1600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Book Info */
+.book-info .head {
+  font-size: 2.5rem;
+  font-family: Cambria, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Book Cards */
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card img {
+  width: 180px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.book-details {
+  text-align: center;
+}
+
+.book-details h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.book-details a {
+  display: inline-block;
+  background-color: #f5a564;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.book-details a:hover {
+  background-color: #e59446;
+}
+
+/* Pricing & Payment Details */
+.pricing-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.purchase, .payment {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.purchase:hover, .payment:hover {
+  transform: translateY(-5px);
+}
+
+.purchase {
+  background-color: #fff5e1;
+}
+
+.payment {
+  background-color: #e0f7fa;
+}
+
+.pricing-details h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Lists */
+.book-list, .payment-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.book-item, .payment-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.book-item:last-child, .payment-item:last-child {
+  border-bottom: none;
+}
+
+.book-title, .payment-title {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.book-price, .value {
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.payment-title {
+  color: #555;
+}
+
+/* Order Form */
+.order-form {
+  margin: 10px 30px;
+  width: 100%;
+  max-width: 950px;
+  margin: 10px auto; 
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(196, 27, 27, 0.1);
+}
+
+.order-form form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.order-form label {
+  margin-bottom: 10px;
+}
+
+.order-form input, .order-form textarea, .order-form select {
+  width: 100%; 
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.order-form input[type="submit"] {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.order-form input[type="submit"]:hover {
+  background-color: #555;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 992px) {
+  .book-container {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-details {
+    grid-template-columns: 1fr;
+  }
+
+  .order-form {
+    padding: 10px; 
+  }
+}
