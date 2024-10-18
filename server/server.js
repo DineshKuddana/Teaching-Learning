@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 
-mongoose.connect("mongodb+srv://Dinesh_41916:dinesh%40123@cluster0.pxucwxc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://Dinesh_41916:dinesh%40123@cluster0.pxucwxc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(() =>{
     console.log("Connected to the Database")
 }).catch((e) =>{
