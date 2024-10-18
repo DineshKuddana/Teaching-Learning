@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 
-mongoose.connect('mongodb://localhost:27017/TLB').then(() =>{
+mongoose.connect('mongodb+srv://Dinesh_41916:dinesh@123@cluster0.pxucwxc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(() =>{
     console.log("Connected to the Database")
 }).catch((e) =>{
     console.log("Error Connecting to DB: ",e)
