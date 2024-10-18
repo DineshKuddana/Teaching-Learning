@@ -1,7 +1,7 @@
 // TableDisplay.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './TableDisplay.css'; // Add any specific styling for the table if needed
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./TableDisplay.css"; // Add any specific styling for the table if needed
 
 const TableDisplay = () => {
   const [data, setData] = useState([]);
@@ -9,7 +9,9 @@ const TableDisplay = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get("http://localhost:5000/get-data");
+        const result = await axios.get(
+          "https://teaching-learning-backend.onrender.com//get-data"
+        );
         if (result.data.status === "Ok") {
           setData(result.data.data);
         } else {
@@ -23,14 +25,15 @@ const TableDisplay = () => {
     fetchData();
   }, []);
 
-  const message = () =>{
+  const message = () => {
     alert("Message sent successfully");
-    
-  }
+  };
 
   return (
     <div className="table-display">
-      <h4 style={{ textAlign: "center", marginBottom: "20px" }}>Submitted Forms</h4>
+      <h4 style={{ textAlign: "center", marginBottom: "20px" }}>
+        Submitted Forms
+      </h4>
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
@@ -38,7 +41,6 @@ const TableDisplay = () => {
             <th>Email</th>
             <th>Message</th>
             <th>Reply</th>
-           
           </tr>
         </thead>
         <tbody>
@@ -47,7 +49,9 @@ const TableDisplay = () => {
               <td>{item.name}</td>
               <td>{item.email}</td>
               <td>{item.message}</td>
-              <td><button onClick={message}>Yes</button>&nbsp; <button>No</button></td>
+              <td>
+                <button onClick={message}>Yes</button>&nbsp; <button>No</button>
+              </td>
             </tr>
           ))}
         </tbody>

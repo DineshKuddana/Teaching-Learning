@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import '../TableDisplay.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "../TableDisplay.css";
 
 const BlogComments = () => {
   const [data, setData] = useState([]);
@@ -11,17 +11,19 @@ const BlogComments = () => {
     const fetchData = async () => {
       try {
         setLoading(true); // Set loading state
-        const result = await axios.get('http://localhost:5000/get-comments');
+        const result = await axios.get(
+          "https://teaching-learning-backend.onrender.com//get-comments"
+        );
 
-        if (result.data.status === 'Ok') {
+        if (result.data.status === "Ok") {
           setData(result.data.result); // Access the result directly
         } else {
-          setError('Error fetching data: ' + result.data.status);
+          setError("Error fetching data: " + result.data.status);
         }
 
         setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
-        setError('An unexpected error occurred: ' + error.message);
+        setError("An unexpected error occurred: " + error.message);
         setLoading(false); // Set loading to false even if there is an error
       }
     };
@@ -34,8 +36,10 @@ const BlogComments = () => {
 
   return (
     <div className="table-display">
-      <h4 style={{ textAlign: 'center', marginBottom: '20px' }}>Submitted Comments</h4>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <h4 style={{ textAlign: "center", marginBottom: "20px" }}>
+        Submitted Comments
+      </h4>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
             <th>Name</th>
@@ -44,7 +48,7 @@ const BlogComments = () => {
             <th>Created At</th>
           </tr>
         </thead>
-        
+
         <tbody>
           {data.length > 0 ? (
             data.map((item) => (
@@ -57,7 +61,9 @@ const BlogComments = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="4" style={{ textAlign: 'center' }}>No comments available</td>
+              <td colSpan="4" style={{ textAlign: "center" }}>
+                No comments available
+              </td>
             </tr>
           )}
         </tbody>
