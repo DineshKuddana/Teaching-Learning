@@ -32,7 +32,7 @@ const Contact = () => {
     try {
       console.log("Submitting form data:", formData);
       const result = await axios.post(
-        "https://teaching-learning-backend.onrender.com//upload-data",
+        "https://teaching-learning-backend.onrender.com/upload-data",
         formState,
         {
           headers: { "Content-Type": "application/json" },

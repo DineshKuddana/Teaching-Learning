@@ -76,7 +76,7 @@ const BlogDetail = () => {
     const fetchComments = async () => {
       try {
         const response = await axios.get(
-          `https://teaching-learning-backend.onrender.com//comments/${id}`
+          `https://teaching-learning-backend.onrender.com/comments/${id}`
         );
         setComments(response.data);
       } catch (error) {
@@ -95,7 +95,7 @@ const BlogDetail = () => {
 
     try {
       const response = await axios.post(
-        "https://teaching-learning-backend.onrender.com//comments",
+        "https://teaching-learning-backend.onrender.com/comments",
         { name, comment, blogId: id }
       );
       alert("Comment submitted successfully!");
