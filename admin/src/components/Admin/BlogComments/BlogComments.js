@@ -12,7 +12,7 @@ const BlogComments = () => {
       try {
         setLoading(true); // Set loading state
         const result = await axios.get(
-          "https://teaching-learning-backend.onrender.com//get-comments"
+          "https://teaching-learning-backend.onrender.com/get-comments"
         );
 
         if (result.data.status === "Ok") {
