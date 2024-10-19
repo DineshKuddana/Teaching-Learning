@@ -41,7 +41,7 @@ function App() {
         <Routes>
           {/* Render AdminLogin if not authenticated */}
           <Route
-            path="/admin"
+            path="/"
             element={
               isAuthenticated ? (
                 <AdminConsole onLogout={handleLogout} />
