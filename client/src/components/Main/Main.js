@@ -9,7 +9,7 @@ const MainSection = () => {
   useStickyNavbar();
   return (
 
-    
+        
     <>
     <Header/>
     <NavBar/>
