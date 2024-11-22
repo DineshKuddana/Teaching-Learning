@@ -1,75 +1,115 @@
 .header-container {
-    background-color: #254d76;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  
+  background-image: linear-gradient(135deg, rgba(23, 37, 61, 0.8), rgba(3, 37, 87, 0.89));
+  background-size: 400% 400%; /* For gradient animation */
+  color: #fff;
+  padding: 10px 20px; /* Reduced padding */
+  text-align: center;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 10;
+  animation: gradientAnimation 6s ease infinite; /* Background animation */
+}
+
+.header-content {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.by {
+  margin-top: 5px;
+  color: #b181ff;
+}
+
+.header-title {
+  color: rgb(255, 245, 245);
+  font-size: 2.4rem; /* Reduced font size */
+  margin: 10px 0;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: capitalize;
+  font-family: "Montserrat", sans-serif;
+  animation: fadeIn 2s ease-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.sub-title {
+  font-size: 1.4rem; /* Reduced font size */
+  font-weight: 400;
+  color: #e4ff48;
+  margin-top: -10px; /* Reduced spacing */
+  font-family: "Georgia", serif;
+}
+
+.header-tagline {
+  font-size: 1.1rem; /* Reduced font size */
+  font-style: italic;
+  margin-top: -19px; /* Reduced spacing */
+  color: hsl(0, 0%, 71%);
+  animation: slideUp 2s ease-out;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+/* Background Gradient Animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-  
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Text Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .header-title {
-    font-size: 2.3rem;
-    margin: 0;
-    font-weight: bold;
-    /* line-height: 1; */
-    letter-spacing: 1px;
-    font-family: 'Roboto', sans-serif;
-    text-transform: uppercase;
-    color: rgba(221, 221, 223, 0.952);
-    animation: slideInFromLeft 4s ease-out;
+    font-size: 2rem;
   }
-  
-  @keyframes slideInFromLeft {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-}
 
-@keyframes slideInFromRight {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-}
-
-  
-  .sub-title {
-    font-size: 1.8rem;
-    font-weight:lighter;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-top: 10px;
-    color: #8af70d;
-    
-  }
-  
   .header-tagline {
-    font-size: 1.3rem;
-    font-style: italic;
-    margin-top: -20px;
-    color: #ffebcc;
-    animation: slideInFromRight 5s ease-out;
+    font-size: 0.9rem;
   }
-  
-  @media (max-width: 768px) {
-    .header-title {
-      font-size: 2rem;
-      animation: slideInFromLeft 1s ease-out;
-    }
-  
-    .header-tagline {
-      font-size: 1.2rem;
-    }
+
+  .sub-title {
+    font-size: 1rem;
   }
-  
-  @media (max-width: 480px) {
-    .header-title {
-      font-size: 1.6rem;
-      animation: slideInFromLeft 1s ease-out;
-    }
-  
-    .header-tagline {
-      font-size: 1rem;
-    }
-  
-    .sub-title {
-      font-size: 1rem;
-    }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.6rem;
   }
-  
+
+  .header-tagline {
+    font-size: 0.8rem;
+  }
+
+  .sub-title {
+    font-size: 0.9rem;
+  }
+}
