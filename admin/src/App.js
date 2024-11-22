@@ -4,8 +4,8 @@ import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"; // Correct imports
 
-import AdminLogin from "../src/components/Admin/AdminLogin"; // Ensure paths are correct
-import AdminConsole from "../src/components/Admin/AdminConsole"; // Ensure paths are correct
+import AdminConsole from "../src/components/Admin/AdminConsole/AdminConsole"
+import AdminLogin from "./components/Admin/AdminLogin/AdminLogin";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

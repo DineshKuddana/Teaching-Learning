@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../TableDisplay.css";
+import "../TableDisplay/TableDisplay";;
 
 const BlogComments = () => {
   const [data, setData] = useState([]);
