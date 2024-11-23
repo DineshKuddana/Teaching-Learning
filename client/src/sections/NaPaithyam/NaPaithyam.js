@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './NaPaithyam.css';
 import NavBar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -6,8 +7,11 @@ import useStickyNavbar from "../../hooks/useStickyNavbar";
 
 const NaPaithyam = () => {
   useStickyNavbar();
-  // State to manage active section: 'videos' or 'quotes'
+
   const [activeSection, setActiveSection] = useState('videos');
+  const [quotes, setQuotes] = useState([]); // Initialize as an empty array
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Videos data
   const videos = [
@@ -43,43 +47,41 @@ const NaPaithyam = () => {
     }
   ];
 
-  // Quotes data
-  const quotes = [
-    {
-      text: "Education is the most powerful weapon which you can use to change the world.",
-      author: "Nelson Mandela"
-    },
-    {
-      text: "The only limit to our realization of tomorrow is our doubts of today.",
-      author: "Franklin D. Roosevelt"
-    },
-    {
-      text: "Success is not final, failure is not fatal: It is the courage to continue that counts.",
-      author: "Winston Churchill"
-    },
-    {
-      text: "In the middle of difficulty lies opportunity.",
-      author: "Albert Einstein"
-    },
-    {
-      text: "Life is what happens when you're busy making other plans.",
-      author: "John Lennon"
-    }
-  ];
+  useEffect(() => {
+    fetchQuotes();
+  }, []);
 
-  // Handler to switch sections
+  const fetchQuotes = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        "https://teaching-learning-backend.onrender.com/get-quotes"
+      );
+      if (response.data.status === "Ok") {
+        setQuotes(response.data.data || []); // Set quotes or fallback to an empty array
+        setError(null);
+      } else {
+        setError("Failed to fetch quotes. Invalid response from server.");
+      }
+    } catch (error) {
+      setError("An unexpected error occurred: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSectionChange = (section) => {
     setActiveSection(section);
+    if (section === 'quotes') {
+      fetchQuotes();
+    }
   };
 
   return (
     <>
       <NavBar />
       <main className="na-paithyam-main">
-        {/* Main Heading */}
         <h1 className="main-heading">Welcome to NaaPaithyam</h1>
-
-        {/* Section Buttons */}
         <div className="section-buttons">
           <button
             className={`section-button ${activeSection === 'videos' ? 'active' : ''}`}
@@ -95,7 +97,6 @@ const NaPaithyam = () => {
           </button>
         </div>
 
-        {/* Conditional Rendering */}
         {activeSection === 'videos' ? (
           <section className="video-section">
             <h2 className="section-heading">Diverse Insights</h2>
@@ -119,14 +120,20 @@ const NaPaithyam = () => {
         ) : (
           <section className="quotes-section">
             <h2 className="section-heading">Inspirational Quotes</h2>
-            <div className="quotes-main">
-              {quotes.map((quote, index) => (
-                <div className="quote-card" key={index}>
-                  <p className="quote-text">"{quote.text}"</p>
-                  <p className="quote-author">- {quote.author}</p>
-                </div>
-              ))}
-            </div>
+            {loading ? (
+              <p>Loading quotes...</p>
+            ) : error ? (
+              <p className="error-text">{error}</p>
+            ) : (
+              <div className="quotes-main">
+                {quotes.map((quote, index) => (
+                  <div className="quote-card" key={index}>
+                    <h3 className="quote-title">{quote.title}</h3>
+                    <p className="quote-text">"{quote.text}"</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </section>
         )}
       </main>

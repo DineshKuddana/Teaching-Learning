@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./AdminConsole.css";
 import TableDisplay from '../TableDisplay/TableDisplay';
 import BlogComments from '../BlogComments/BlogComments';
+import Quotes from '../../Quotes/Quotes';
 
 
 const AdminConsole = ({ onLogout }) => {
@@ -50,7 +51,7 @@ const AdminConsole = ({ onLogout }) => {
         return <h2>Data will update soon...</h2>;
       
       case "quotes":
-        return <h2>Dynamic Quotes update will be soon</h2>
+        return <Quotes/>
       default:
         return <h1>Welcome to Admin Console</h1>;
     }

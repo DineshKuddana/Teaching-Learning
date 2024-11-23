@@ -1,0 +1,82 @@
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .addButton {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .addButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .input, .textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .textarea {
+    height: 100px;
+  }
+  
+  .submitButton {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background-color: #218838;
+  }
+  
+  .quoteList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .quoteItem {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  .quoteItem h3 {
+    margin: 0 0 10px;
+    color: #007bff;
+  }
+  
+  .quoteItem p {
+    margin: 0;
+    color: #555;
+  }
+  
