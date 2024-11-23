@@ -54,7 +54,7 @@ const Quotes = () => {
 
       if (result.data.status === 'Ok') {
         alert('Quote submitted successfully!');
-        setQuotes([...quotes, newQuote]); // Add the new quote to the list
+        setQuotes([...quotes, result.data.data]); // Add the new quote to the list
         setNewQuote({ title: '', text: '' }); // Clear input fields
         setIsAdding(false); // Close the form
       } else {
@@ -73,7 +73,7 @@ const Quotes = () => {
     try {
       const updatedQuote = quotes[index];
       const result = await axios.put(
-        'https://teaching-learning-backend.onrender.com/update-quote',
+        `https://teaching-learning-backend.onrender.com/update-quote/${updatedQuote._id}`,
         updatedQuote,
         { headers: { 'Content-Type': 'application/json' } }
       );
@@ -91,16 +91,16 @@ const Quotes = () => {
 
   const handleDelete = async (index) => {
     try {
+      const quoteToDelete = quotes[index];
       const result = await axios.delete(
-        'https://teaching-learning-backend.onrender.com/delete-quote',
-        { data: quotes[index] }
+        `https://teaching-learning-backend.onrender.com/delete-quote/${quoteToDelete._id}`
       );
 
       if (result.data.status === 'Ok') {
         alert('Quote deleted successfully!');
         setQuotes(quotes.filter((_, i) => i !== index)); // Remove quote from the list
       } else {
-        alert('Error deleting quote: ' + result.data.status);
+        alert('Error deleting quote: ' + result.data.message);
       }
     } catch (error) {
       alert('An unexpected error occurred: ' + error.message);
@@ -142,12 +142,11 @@ const Quotes = () => {
       ) : (
         <ul className="quoteList">
           {quotes.map((quote, index) => (
-            <li key={index} className="quoteItem">
+            <li key={quote._id} className="quoteItem">
               {editIndex === index ? (
                 <>
                   <input
                     type="text"
-                    name="title"
                     value={quote.title}
                     onChange={(e) =>
                       setQuotes(
@@ -159,7 +158,6 @@ const Quotes = () => {
                     className="editInput"
                   />
                   <textarea
-                    name="text"
                     value={quote.text}
                     onChange={(e) =>
                       setQuotes(
