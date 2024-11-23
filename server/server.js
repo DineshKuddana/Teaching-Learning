@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Comment = require('./commentsSchema.js');
 const Contact = require('./contactSchema.js');
+const Quotes = require('./quotesSchema.js');
+
 const cors = require('cors'); 
 
 const port = 5000;
@@ -100,4 +102,24 @@ app.delete('/delete-comment/:id', async (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server Started on port ${port}`);
+});
+
+
+
+
+
+//API for quotes section
+
+app.post("/upload-quotes", async (req, res) => {
+    const formData = {
+        title: req.body.title,
+        text : req.body.text,
+    };
+
+    try {
+        await Quotes.create(formData);
+        res.send({ status: "Ok" });
+    } catch (error) {
+        res.json({ status: error.message });
+    }
 });
