@@ -108,6 +108,9 @@ app.listen(port, () => {
 
 
 
+
+
+
 //API for quotes section
 
 app.post("/upload-quotes", async (req, res) => {
@@ -119,6 +122,17 @@ app.post("/upload-quotes", async (req, res) => {
     try {
         await Quotes.create(formData);
         res.send({ status: "Ok" });
+    } catch (error) {
+        res.json({ status: error.message });
+    }
+});
+
+
+
+app.get('/get-quotes', async (req, res) => {
+    try {
+        const data = await Quotes.find({});
+        res.send({ status: "Ok", data });
     } catch (error) {
         res.json({ status: error.message });
     }
