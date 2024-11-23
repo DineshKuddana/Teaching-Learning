@@ -142,7 +142,7 @@ app.get('/get-quotes', async (req, res) => {
 
 
 // Update a quote by ID
-app.put('/update-quote/:id', async (req, res) => {
+app.put('/update-quote', async (req, res) => {
     const { id } = req.params;
     const { title, text } = req.body;
 
@@ -164,7 +164,7 @@ app.put('/update-quote/:id', async (req, res) => {
 });
 
 // Delete a quote by ID
-app.delete('/delete-quote/:id', async (req, res) => {
+app.delete('/delete-quote', async (req, res) => {
     const { id } = req.params;
 
     try {

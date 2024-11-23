@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Quotes.css';
-import axios from "axios";
+import axios from 'axios';
 
 const Quotes = () => {
   const [quotes, setQuotes] = useState([]);
   const [newQuote, setNewQuote] = useState({ title: '', text: '' });
   const [isAdding, setIsAdding] = useState(false);
-  const [editIndex, setEditIndex] = useState(null); // Track which quote is being edited
+  const [editIndex, setEditIndex] = useState(null); // Track the index of the quote being edited
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,16 +19,16 @@ const Quotes = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "https://teaching-learning-backend.onrender.com/get-quotes"
+        'https://teaching-learning-backend.onrender.com/get-quotes'
       );
-      if (response.data.status === "Ok") {
+      if (response.data.status === 'Ok') {
         setQuotes(response.data.data || []);
         setError(null);
       } else {
-        setError("Failed to fetch quotes. Invalid response from server.");
+        setError('Failed to fetch quotes. Invalid response from server.');
       }
     } catch (error) {
-      setError("An unexpected error occurred: " + error.message);
+      setError('An unexpected error occurred: ' + error.message);
     } finally {
       setLoading(false);
     }
@@ -41,60 +41,69 @@ const Quotes = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!newQuote.title || !newQuote.text) {
+      alert('Please fill out both the title and the quote.');
+      return;
+    }
     try {
       const result = await axios.post(
-        "https://teaching-learning-backend.onrender.com/upload-quotes",
+        'https://teaching-learning-backend.onrender.com/upload-quotes',
         newQuote,
-        { headers: { "Content-Type": "application/json" } }
+        { headers: { 'Content-Type': 'application/json' } }
       );
 
-      if (result.data.status === "Ok") {
-        alert("Quote submitted successfully!");
-        setQuotes([...quotes, { ...newQuote, _id: result.data.data._id }]); // Add new quote to list
-        setNewQuote({ title: "", text: "" });
-        setIsAdding(false);
+      if (result.data.status === 'Ok') {
+        alert('Quote submitted successfully!');
+        setQuotes([...quotes, newQuote]); // Add the new quote to the list
+        setNewQuote({ title: '', text: '' }); // Clear input fields
+        setIsAdding(false); // Close the form
       } else {
-        alert("Error submitting quote: " + result.data.status);
+        alert('Error submitting quote: ' + result.data.status);
       }
     } catch (error) {
-      alert("An unexpected error occurred: " + error.message);
+      alert('An unexpected error occurred: ' + error.message);
     }
   };
 
-  const handleEdit = async (index) => {
-    const quoteToUpdate = quotes[index];
+  const handleEdit = (index) => {
+    setEditIndex(index);
+  };
+
+  const saveEdit = async (index) => {
     try {
+      const updatedQuote = quotes[index];
       const result = await axios.put(
-        `https://teaching-learning-backend.onrender.com/update-quote/${quoteToUpdate._id}`,
-        quoteToUpdate,
-        { headers: { "Content-Type": "application/json" } }
+        'https://teaching-learning-backend.onrender.com/update-quote',
+        updatedQuote,
+        { headers: { 'Content-Type': 'application/json' } }
       );
 
-      if (result.data.status === "Ok") {
-        alert("Quote updated successfully!");
-        setEditIndex(null);
+      if (result.data.status === 'Ok') {
+        alert('Quote updated successfully!');
+        setEditIndex(null); // Exit edit mode
       } else {
-        alert("Error updating quote: " + result.data.status);
+        alert('Error updating quote: ' + result.data.status);
       }
     } catch (error) {
-      alert("An unexpected error occurred: " + error.message);
+      alert('An unexpected error occurred: ' + error.message);
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (index) => {
     try {
       const result = await axios.delete(
-        `https://teaching-learning-backend.onrender.com/delete-quote/${id}`
+        'https://teaching-learning-backend.onrender.com/delete-quote',
+        { data: quotes[index] }
       );
 
-      if (result.data.status === "Ok") {
-        alert("Quote deleted successfully!");
-        setQuotes(quotes.filter((quote) => quote._id !== id));
+      if (result.data.status === 'Ok') {
+        alert('Quote deleted successfully!');
+        setQuotes(quotes.filter((_, i) => i !== index)); // Remove quote from the list
       } else {
-        alert("Error deleting quote: " + result.data.status);
+        alert('Error deleting quote: ' + result.data.status);
       }
     } catch (error) {
-      alert("An unexpected error occurred: " + error.message);
+      alert('An unexpected error occurred: ' + error.message);
     }
   };
 
@@ -102,7 +111,7 @@ const Quotes = () => {
     <div className="container">
       <h2>Quotes Section</h2>
       <button onClick={() => setIsAdding(!isAdding)} className="addButton">
-        Add New
+        {isAdding ? 'Cancel' : 'Add New'}
       </button>
       {isAdding && (
         <form className="form" onSubmit={handleSubmit}>
@@ -133,15 +142,12 @@ const Quotes = () => {
       ) : (
         <ul className="quoteList">
           {quotes.map((quote, index) => (
-            <li key={quote._id} className="quoteItem">
+            <li key={index} className="quoteItem">
               {editIndex === index ? (
                 <>
-                <div className='box'>
-                  <p>Title:</p>
                   <input
                     type="text"
                     name="title"
-                    className='field1'
                     value={quote.title}
                     onChange={(e) =>
                       setQuotes(
@@ -150,12 +156,10 @@ const Quotes = () => {
                         )
                       )
                     }
+                    className="editInput"
                   />
-
-                  <p>Quote:</p>
                   <textarea
                     name="text"
-                    className='field2'
                     value={quote.text}
                     onChange={(e) =>
                       setQuotes(
@@ -164,17 +168,25 @@ const Quotes = () => {
                         )
                       )
                     }
+                    className="editTextarea"
                   />
-                  </div>
-                  <button onClick={() => handleEdit(index)} className='btn'>Save</button>
-                  <button onClick={() => setEditIndex(null)} className='btn'>Cancel</button>
+                  <button onClick={() => saveEdit(index)} className="btn">
+                    Save
+                  </button>
+                  <button onClick={() => setEditIndex(null)} className="btn">
+                    Cancel
+                  </button>
                 </>
               ) : (
                 <>
                   <h3>{quote.title}</h3>
                   <p>{quote.text}</p>
-                  <button onClick={() => setEditIndex(index)} className='btn'>Edit</button>
-                  <button onClick={() => handleDelete(quote._id)} className='btn'>Delete</button>
+                  <button onClick={() => handleEdit(index)} className="btn">
+                    Edit
+                  </button>
+                  <button onClick={() => handleDelete(index)} className="btn">
+                    Delete
+                  </button>
                 </>
               )}
             </li>
