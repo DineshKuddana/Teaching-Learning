@@ -107,6 +107,7 @@
 
 /* Mobile view adjustments */
 @media (max-width: 768px) {
+  
   .nav-links {
     position: absolute;
     top: 100%;
@@ -119,15 +120,17 @@
     align-items: center;
     transition: height 0.4s ease;
     gap: 15px;
+
   }
 
   .nav-links.open {
     height: auto;
-    max-height: 400px;
+    max-height: 600px;
+    padding: 30px 0;
   }
 
   .nav-links a {
-    margin: 15px 0;
+    margin: 6px 5px 0;
     font-size: 1.2rem;
   }
 
