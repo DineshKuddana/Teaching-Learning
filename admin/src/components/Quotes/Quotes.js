@@ -54,7 +54,7 @@ const Quotes = () => {
 
       if (result.data.status === 'Ok') {
         alert('Quote submitted successfully!');
-        setQuotes([...quotes, result.data.data]); // Add the new quote to the list
+        setQuotes([...quotes, newQuote]); // Add the new quote to the list
         setNewQuote({ title: '', text: '' }); // Clear input fields
         setIsAdding(false); // Close the form
       } else {
@@ -81,6 +81,7 @@ const Quotes = () => {
       if (result.data.status === 'Ok') {
         alert('Quote updated successfully!');
         setEditIndex(null); // Exit edit mode
+        fetchQuotes(); // Re-fetch updated quotes
       } else {
         alert('Error updating quote: ' + result.data.status);
       }
@@ -91,16 +92,16 @@ const Quotes = () => {
 
   const handleDelete = async (index) => {
     try {
-      const quoteToDelete = quotes[index];
+      const quoteId = quotes[index]._id;
       const result = await axios.delete(
-        `https://teaching-learning-backend.onrender.com/delete-quote/${quoteToDelete._id}`
+        `https://teaching-learning-backend.onrender.com/delete-quote/${quoteId}`
       );
 
       if (result.data.status === 'Ok') {
         alert('Quote deleted successfully!');
         setQuotes(quotes.filter((_, i) => i !== index)); // Remove quote from the list
       } else {
-        alert('Error deleting quote: ' + result.data.message);
+        alert('Error deleting quote: ' + result.data.status);
       }
     } catch (error) {
       alert('An unexpected error occurred: ' + error.message);
@@ -147,6 +148,7 @@ const Quotes = () => {
                 <>
                   <input
                     type="text"
+                    name="title"
                     value={quote.title}
                     onChange={(e) =>
                       setQuotes(
@@ -158,6 +160,7 @@ const Quotes = () => {
                     className="editInput"
                   />
                   <textarea
+                    name="text"
                     value={quote.text}
                     onChange={(e) =>
                       setQuotes(
