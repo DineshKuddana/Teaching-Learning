@@ -137,3 +137,45 @@ app.get('/get-quotes', async (req, res) => {
         res.json({ status: error.message });
     }
 });
+
+
+
+
+// Update a quote by ID
+app.put('/update-quote/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, text } = req.body;
+
+    try {
+        const updatedQuote = await Quotes.findByIdAndUpdate(
+            id, 
+            { title, text }, 
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedQuote) {
+            return res.status(404).json({ status: "Error", message: "Quote not found" });
+        }
+
+        res.status(200).json({ status: "Ok", data: updatedQuote });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: "Failed to update quote", error: error.message });
+    }
+});
+
+// Delete a quote by ID
+app.delete('/delete-quote/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deletedQuote = await Quotes.findByIdAndDelete(id);
+
+        if (!deletedQuote) {
+            return res.status(404).json({ status: "Error", message: "Quote not found" });
+        }
+
+        res.status(200).json({ status: "Ok", message: "Quote deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ status: "Error", message: "Failed to delete quote", error: error.message });
+    }
+});
