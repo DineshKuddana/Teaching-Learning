@@ -80,3 +80,33 @@
     color: #555;
   }
   
+
+
+
+  .btn{
+    padding: 5px 10px;
+    background-color: rgb(101, 2, 63);
+    margin: 10px 10px;
+    color: #fff;
+    border: none;
+  }
+
+  
+  .field1{
+    /* border: none; */
+    margin: 10px 0;
+    width: 100px;
+
+  }
+
+  .field2{
+    margin: 10px 0;
+    width: 200px;
+    height: 50px;
+  }
+
+
+  
+  .box{
+    display: grid;
+  }

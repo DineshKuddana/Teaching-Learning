@@ -136,9 +136,12 @@ const Quotes = () => {
             <li key={quote._id} className="quoteItem">
               {editIndex === index ? (
                 <>
+                <div className='box'>
+                  <p>Title:</p>
                   <input
                     type="text"
                     name="title"
+                    className='field1'
                     value={quote.title}
                     onChange={(e) =>
                       setQuotes(
@@ -148,8 +151,11 @@ const Quotes = () => {
                       )
                     }
                   />
+
+                  <p>Quote:</p>
                   <textarea
                     name="text"
+                    className='field2'
                     value={quote.text}
                     onChange={(e) =>
                       setQuotes(
@@ -159,15 +165,16 @@ const Quotes = () => {
                       )
                     }
                   />
-                  <button onClick={() => handleEdit(index)}>Save</button>
-                  <button onClick={() => setEditIndex(null)}>Cancel</button>
+                  </div>
+                  <button onClick={() => handleEdit(index)} className='btn'>Save</button>
+                  <button onClick={() => setEditIndex(null)} className='btn'>Cancel</button>
                 </>
               ) : (
                 <>
                   <h3>{quote.title}</h3>
                   <p>{quote.text}</p>
-                  <button onClick={() => setEditIndex(index)}>Edit</button>
-                  <button onClick={() => handleDelete(quote._id)}>Delete</button>
+                  <button onClick={() => setEditIndex(index)} className='btn'>Edit</button>
+                  <button onClick={() => handleDelete(quote._id)} className='btn'>Delete</button>
                 </>
               )}
             </li>
